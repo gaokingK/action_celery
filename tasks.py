@@ -1,17 +1,20 @@
 import time
-from celery import Celery
 
-
-app = Celery('tasks',
-             backend='redis://localhost',
-             broker="amqp://localhost")
+from celery_main import app
 
 
 @app.task
 def add(x, y):
-    time.sleep(5)
-    res = x + y
-    print("ok....")
-    assert res > 5
-    return res
+    print("ok......")
+    return x + y + y
 
+
+@app.task
+def mul(x, y):
+    time.sleep(5)
+    return x * y
+
+
+@app.task
+def xsum(numbers):
+    return sum(numbers)
