@@ -8,10 +8,11 @@ app = Celery("celery_main",
 
 app.conf.update(
     result_expires=3600,
-    imports=["tasks"],
-    task_routes={
-        "tasks.add": {"queue": "hipri"}
-    },
+    imports=["tasks",
+             "wingman"],
+    # task_routes={
+    #     "tasks.add": {"queue": "hipri"}
+    # },
 )
 
 
